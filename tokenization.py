@@ -33,9 +33,11 @@ def validate_case_matches_checkpoint(do_lower_case, init_checkpoint):
   # should have been stored in the bert_config.json file, but it's not, so
   # we have to heuristically detect it to validate.
 
+  # 1
   if not init_checkpoint:
     return
 
+  # 2
   m = re.match("^.*?([A-Za-z0-9_-]+)/bert_model.ckpt", init_checkpoint)
   if m is None:
     return
@@ -52,6 +54,7 @@ def validate_case_matches_checkpoint(do_lower_case, init_checkpoint):
       "multi_cased_L-12_H-768_A-12"
   ]
 
+  # 3
   is_bad_config = False
   if model_name in lower_models and not do_lower_case:
     is_bad_config = True
